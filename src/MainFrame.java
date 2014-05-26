@@ -7,7 +7,7 @@ public class MainFrame {
 	public MainFrame() {
 		JFrame test = new JFrame();
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JPanel panel1 = new JPanel();
+		GamePanel panel1 = new GamePanel();
 		panel1.setPreferredSize(new Dimension(100,100));
 		
 		test.add(panel1); 
