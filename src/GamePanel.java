@@ -3,6 +3,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -14,6 +16,8 @@ public class GamePanel extends JPanel{
 	int myWidth;
 	int myHeight;
 	
+	MainPlayer player;
+	
 	ArrayList<GameObject> gameObjs;
 	
 	public GamePanel(int width, int height) {
@@ -24,9 +28,11 @@ public class GamePanel extends JPanel{
 		myHeight = height;
 		
 		setPreferredSize(new Dimension(myWidth, myHeight));
+		setFocusable(true);
+		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
-		MainPlayer player = new MainPlayer(0,0);
+		player = new MainPlayer(0,0);
 		gameObjs.add(player);
 		
 		//DEBUG: start running the game immediately
@@ -61,5 +67,52 @@ public class GamePanel extends JPanel{
 			myRender();
 		}
 		
+	}
+	
+	private class myKeyListener implements KeyListener {
+		public void keyPressed(KeyEvent e) {
+			int key = e.getKeyCode();
+			
+			if (key == KeyEvent.VK_W) {
+				System.out.println("w pressed");
+				player.upPressed();
+			}
+			if (key == KeyEvent.VK_A) {
+				System.out.println("a pressed");
+				player.leftPressed();
+			}
+			if (key == KeyEvent.VK_S) {
+				System.out.println("s pressed");
+				player.downPressed();
+			}
+			if (key == KeyEvent.VK_D) {
+				System.out.println("d pressed");
+				player.rightPressed();
+			}
+		}
+		
+		public void keyReleased(KeyEvent e) {
+			int key = e.getKeyCode();
+			
+			if (key == KeyEvent.VK_W) {
+				System.out.println("w released");
+				player.upReleased();
+			}
+			if (key == KeyEvent.VK_A) {
+				System.out.println("a released");
+				player.leftReleased();
+			}
+			if (key == KeyEvent.VK_S) {
+				System.out.println("s released");
+				player.downReleased();
+			}
+			if (key == KeyEvent.VK_D) {
+				System.out.println("d released");
+				player.rightReleased();
+			}
+		}
+		
+		public void keyTyped(KeyEvent e) {}
+
 	}
 }
