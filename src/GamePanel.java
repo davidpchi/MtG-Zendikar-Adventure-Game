@@ -32,7 +32,17 @@ public class GamePanel extends JPanel{
 		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
-		player = new MainPlayer(0,0);
+		player = new MainPlayer(0,0, this);
+		
+		WallObject tempWall = new WallObject(0,250,500,64, null);
+		gameObjs.add(tempWall);
+		
+		tempWall = new WallObject(250,200,500,64, null);
+		gameObjs.add(tempWall);
+
+		tempWall = new WallObject(400,150,500,64, null);
+		gameObjs.add(tempWall);
+		
 		gameObjs.add(player);
 		
 		//DEBUG: start running the game immediately
@@ -55,6 +65,8 @@ public class GamePanel extends JPanel{
 	}
 	
 	public void paint(Graphics g) {
+		super.paint(g);
+		
 		for (int i = 0; i < gameObjs.size(); i++) {
 			gameObjs.get(i).paint(g);
 		}
