@@ -4,7 +4,7 @@ public class MainFrame {
 	public MainFrame() {
 		JFrame test = new JFrame();
 		test.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GamePanel panel1 = new GamePanel(500,500);
+		GamePanel panel1 = new GamePanel(2000, 2000, 500, 500);
 		
 		test.add(panel1); 
 		test.pack();

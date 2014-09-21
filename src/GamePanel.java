@@ -16,23 +16,31 @@ public class GamePanel extends JPanel{
 	int myWidth;
 	int myHeight;
 	
+	RenderCamera cam;
+	
 	MainPlayer player;
 	
 	ArrayList<GameObject> gameObjs;
 	
-	public GamePanel(int width, int height) {
+	public GamePanel(int worldWidth, int worldHeight, int camWidth, int camHeight) {
 		frameCounter = new Timer(10, new drawActionListener());
 		test1 = 0;
 		
-		myWidth = width;
-		myHeight = height;
+		myWidth = worldWidth;
+		myHeight = worldHeight;
 		
-		setPreferredSize(new Dimension(myWidth, myHeight));
+		cam = new RenderCamera(0, 0, camWidth, camHeight);
+		
+		setPreferredSize(new Dimension(camWidth, camHeight));
 		setFocusable(true);
 		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
-		player = new MainPlayer(0,0, this);
+		player = new MainPlayer(cam.width / 2,cam.height / 2, this);
+		
+		//update camera with player in the center
+		cam.x = player.x - cam.width / 2;
+		cam.y = player.y - cam.height / 2;
 		
 		WallObject tempWall = new WallObject(0,250,500,64, null);
 		gameObjs.add(tempWall);
@@ -41,6 +49,15 @@ public class GamePanel extends JPanel{
 		gameObjs.add(tempWall);
 
 		tempWall = new WallObject(400,150,500,64, null);
+		gameObjs.add(tempWall);
+		
+		tempWall = new WallObject(600,150,500,64, null);
+		gameObjs.add(tempWall);
+		
+		tempWall = new WallObject(1000,150,500,64, null);
+		gameObjs.add(tempWall);
+		
+		tempWall = new WallObject(1200,150,500,64, null);
 		gameObjs.add(tempWall);
 		
 		gameObjs.add(player);
@@ -58,6 +75,25 @@ public class GamePanel extends JPanel{
 	
 	public void myUpdate() {
 		test1++;
+		
+		//center camera on the player
+		if ((player.x - cam.x) <= cam.renderEdge) {
+			cam.x -= cam.followSpeed;
+		}
+		
+		if (((cam.x + cam.width) - player.x ) <= cam.renderEdge) {
+			cam.x += cam.followSpeed;
+		}
+		
+		
+		if ((player.y - cam.y) <= cam.renderEdge) {
+			cam.y -= cam.followSpeed;
+		}
+		
+		if (((cam.y + cam.height) - player.y) <= cam.renderEdge) {
+			cam.y += cam.followSpeed;
+		}
+		
 	}
 	
 	public void myRender() {
@@ -67,8 +103,9 @@ public class GamePanel extends JPanel{
 	public void paint(Graphics g) {
 		super.paint(g);
 		
+		//need to re-factor rendering based on camera and world space
 		for (int i = 0; i < gameObjs.size(); i++) {
-			gameObjs.get(i).paint(g);
+			gameObjs.get(i).paint(cam, g);
 		}
 	}
 	

@@ -15,7 +15,6 @@ public class MainPlayer extends GameObject{
 	private int yVel;
 	private GamePanel parent;
 
-	
 	public MainPlayer(int x, int y, GamePanel parent) {
 		super(x,y,32,32, false);
 		this.parent = parent;
@@ -23,11 +22,11 @@ public class MainPlayer extends GameObject{
 		setImage(myImage);
 	}
 	
-	public void paint(Graphics g) {
+	public void paint(RenderCamera cam, Graphics g) {
 		processMove();
 		
 		g.setColor(Color.RED);
-		g.drawOval(x,y,32,32);
+		g.drawOval(x - cam.x, y - cam.y, 32, 32);
 		g.drawImage(image, 32, 32, null);
 	}
 	

@@ -31,9 +31,9 @@ public abstract class GameObject {
 		this.image = image;
 	}
 	
-	public void paint(Graphics g) {
+	public void paint(RenderCamera cam, Graphics g) {
 		g.setColor(Color.RED);
-		g.drawRect(x, y, width, height);
+		g.drawRect(x - cam.x, y - cam.y, width, height);
 	}
 	
 	public boolean isColliding(GameObject other) {
