@@ -8,6 +8,8 @@ public abstract class GameObject {
 	int y;
 	int width;
 	int height;
+	int yVel;
+	int xVel;
 	Image image;
 	boolean isSolid;
 	
@@ -25,6 +27,8 @@ public abstract class GameObject {
 		this.width = width;
 		this.height = height;
 		this.isSolid = isSolid;
+		this.yVel = 0;
+		this.xVel = 0;
 	}
 	
 	public void setImage(Image image) {
@@ -40,6 +44,7 @@ public abstract class GameObject {
 		boolean xValid = false;
 		boolean yValid = false;
 		
+		//this handles complete collisions
 		if ((x+width > other.x && x+width < other.x + other.width) || 
 			(x > other.x && x < other.x + other.width)) {
 			xValid = true;
@@ -48,6 +53,20 @@ public abstract class GameObject {
 		if ((y+height > other.y && y+height < other.y+other.height) ||
 			(y > other.y && y < other.y + other.height)) {
 			yValid = true;
+		}
+		
+		//this handles collision clipping issues
+		for (int i = 0; i < Math.abs(yVel); i++) {
+			if ((y+height+i > other.y && y+height+i < other.y+other.height) ||
+					(y-i > other.y && y-i < other.y + other.height)) {
+					yValid = true;
+			}
+		}
+		
+		//this handles complete collisions
+		if ((x+width > other.x && x+width < other.x + other.width) || 
+			(x > other.x && x < other.x + other.width)) {
+			xValid = true;
 		}
 		
 		return (xValid && yValid);

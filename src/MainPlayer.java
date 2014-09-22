@@ -12,7 +12,6 @@ public class MainPlayer extends GameObject{
 	private boolean isUpPressed;
 	private boolean isDownPressed;
 	private boolean isJumping;
-	private int yVel;
 	private GamePanel parent;
 
 	public MainPlayer(int x, int y, GamePanel parent) {
@@ -21,7 +20,7 @@ public class MainPlayer extends GameObject{
 		Image myImage = Toolkit.getDefaultToolkit().getImage(MainPlayer.class.getResource("player.gif")); 
 		setImage(myImage);
 	}
-	
+		
 	public void paint(RenderCamera cam, Graphics g) {
 		processMove();
 		
@@ -31,10 +30,19 @@ public class MainPlayer extends GameObject{
 	}
 	
 	private void processMove() {
-		if (isLeftPressed)
-			x = x - 5;
-		if (isRightPressed) 
-			x = x + 5;
+		if (isLeftPressed) {
+			xVel = -5;
+		}
+		else if (isRightPressed) {
+			xVel = 5;
+		}
+		else {
+			xVel = 0;
+		}
+		
+		x = x + xVel;
+
+		
 		//jump
 		if (isUpPressed) {
 			if (isJumping == false) {
@@ -46,9 +54,8 @@ public class MainPlayer extends GameObject{
 			y = y - yVel;
 			yVel--;
 		}
-		
+				
 		//hit the ground
-		//TODO: Need to implement ground collision check
 		GameObject temp;
 		isJumping = true;
 		for (int i = 0; i < parent.gameObjs.size(); i++) {
