@@ -35,6 +35,10 @@ public abstract class GameObject {
 		this.image = image;
 	}
 	
+	public void update() {
+
+	}
+	
 	public void paint(RenderCamera cam, Graphics g) {
 		g.setColor(Color.RED);
 		g.drawRect(x - cam.x, y - cam.y, width, height);

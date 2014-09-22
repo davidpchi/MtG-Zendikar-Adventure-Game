@@ -21,6 +21,7 @@ public class GamePanel extends JPanel{
 	MainPlayer player;
 	
 	ArrayList<GameObject> gameObjs;
+	ArrayList<UIObject> UIObjs;
 	
 	public GamePanel(int worldWidth, int worldHeight, int camWidth, int camHeight) {
 		frameCounter = new Timer(10, new drawActionListener());
@@ -36,7 +37,7 @@ public class GamePanel extends JPanel{
 		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
-		player = new MainPlayer(cam.width / 2,cam.height / 2, this);
+		player = new MainPlayer(cam.width / 2, cam.height / 2, this);
 		
 		//update camera with player in the center
 		cam.x = player.x - cam.width / 2;
@@ -62,6 +63,11 @@ public class GamePanel extends JPanel{
 		
 		gameObjs.add(player);
 		
+		UIObjs = new ArrayList<UIObject>();
+		//DEBUG: add some temporary text to showcase UI
+		UIObjs.add(new UIText(10, 32, "This is a test"));
+		UIObjs.add(new UIHealthbar(10, 40, 128, 16));
+		
 		//DEBUG: start running the game immediately
 		start();
 	}
@@ -85,7 +91,6 @@ public class GamePanel extends JPanel{
 			cam.x += cam.followSpeed;
 		}
 		
-		
 		if ((player.y - cam.y) <= cam.renderEdge) {
 			cam.y -= cam.followSpeed;
 		}
@@ -94,6 +99,15 @@ public class GamePanel extends JPanel{
 			cam.y += cam.followSpeed;
 		}
 		
+		//run update on all game objects
+		for (int i = 0; i < gameObjs.size(); i++) {
+			gameObjs.get(i).update();
+		}
+		
+		//run update on all UI objects
+		for (int i = 0; i < UIObjs.size(); i++) {
+			UIObjs.get(i).update();
+		}
 	}
 	
 	public void myRender() {
@@ -106,6 +120,10 @@ public class GamePanel extends JPanel{
 		//need to re-factor rendering based on camera and world space
 		for (int i = 0; i < gameObjs.size(); i++) {
 			gameObjs.get(i).paint(cam, g);
+		}
+		
+		for (int i = 0; i < UIObjs.size(); i++) {
+			UIObjs.get(i).paint(g);
 		}
 	}
 	
