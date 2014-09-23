@@ -13,31 +13,53 @@ public class MainPlayer extends GameObject{
 	private boolean isDownPressed;
 	private boolean isJumping;
 	private GamePanel parent;
+	
+	private boolean isFacingRight;
+	private boolean isFacingLeft;
 
 	public MainPlayer(int x, int y, GamePanel parent) {
 		super(x,y,32,32, false);
 		this.parent = parent;
 		Image myImage = Toolkit.getDefaultToolkit().getImage(MainPlayer.class.getResource("player.gif")); 
 		setImage(myImage);
+		isFacingRight = true;
+		isFacingLeft = false;
 	}
 		
 	public void paint(RenderCamera cam, Graphics g) {
 		processMove();
 		
-		g.setColor(Color.RED);
+		if (isJumping) 
+			g.setColor(Color.GREEN);
+		else if (isFacingLeft)
+			g.setColor(Color.RED);
+		else if (isFacingRight)
+			g.setColor(Color.BLUE);
+		
 		g.drawOval(x - cam.x, y - cam.y, 32, 32);
 		g.drawImage(image, 32, 32, null);
+		
+		//show which side the character is facing
 	}
 	
 	private void processMove() {
 		if (isLeftPressed) {
 			xVel = -5;
+			isFacingLeft = true;
+			isFacingRight = false;
 		}
 		else if (isRightPressed) {
 			xVel = 5;
+			isFacingLeft = false;
+			isFacingRight = true;
 		}
 		else {
-			xVel = 0;
+			if (xVel > 0)
+				xVel--;
+			else if (xVel < 0)
+				xVel++;
+			else
+				xVel = 0;
 		}
 		
 		x = x + xVel;
