@@ -6,18 +6,33 @@ import java.awt.Point;
 
 public class ParticleGeneratorParticle extends GameObject{
 	boolean flaggedForDelete;
-	int particleSize;
+	double particleSize;
 	int particleLife;
 	int particleSpeed;
 	int particleGravity;
 	Point particleTarget;
 	Color particleColor;
 	Image particleImage;
+	boolean isSolidParticle;
+	boolean isGrowParticle;
+	
+	double growRate;
 	
 	private double gravPull;
 	private double moveAngle;
 	
-	public ParticleGeneratorParticle(int x, int y, int particleSize, int particleLife, int particleSpeed, int particleGravity, Point particleTarget, Color particleColor, Image particleImage) {
+	public ParticleGeneratorParticle(
+			int x,
+			int y,
+			int particleSize,
+			int particleLife,
+			int particleSpeed,
+			int particleGravity,
+			boolean isSolidParticle,
+			boolean isGrowParticle,
+			Point particleTarget,
+			Color particleColor,
+			Image particleImage) {
 		this.x = x;
 		this.y = y;
 		this.particleSize = particleSize;
@@ -28,16 +43,30 @@ public class ParticleGeneratorParticle extends GameObject{
 		this.particleColor = particleColor;
 		this.particleImage = particleImage;
 		
+		this.isSolidParticle = isSolidParticle;
+		this.isGrowParticle = isGrowParticle;
+		
 		flaggedForDelete = false;
 		gravPull = 0;
+		growRate = 2;
 		moveAngle = Math.atan2(particleTarget.y - y, particleTarget.x - x);
 	}
 	
 	public ParticleGeneratorParticle(int x, int y) {
-		this(x, y, 2, 10, 5, 0, new Point(x, y - 10), Color.black, null);
+		this(x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
+	}
+	
+	public void setGrowRate(double growRate) {
+		this.growRate = growRate;
 	}
 	
 	public void update() {
+		//TODO: IMPLEMENT SOLID PARTICLE PHYSICS
+		
+		if (isGrowParticle) {
+			particleSize = particleSize + growRate;
+		}
+		
 		x += particleSpeed * Math.cos(moveAngle);
 		y += particleSpeed * Math.sin(moveAngle);
 		
@@ -56,6 +85,6 @@ public class ParticleGeneratorParticle extends GameObject{
 	
 	public void paint(RenderCamera cam, Graphics g) {
 		g.setColor(particleColor);
-		g.fillOval(x - cam.x, y - cam.y, particleSize, particleSize);
+		g.fillOval(x - cam.x, y - cam.y, (int)particleSize, (int)particleSize);
 	}
 }

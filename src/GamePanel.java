@@ -64,18 +64,27 @@ public class GamePanel extends JPanel {
 		
 		gameObjs.add(player);
 		
+		int particleDensity = 10;
+		int particleSize = 10;
+		int particleAngle = 45; 
+		int particleLife = 100;
+		int particleFrequency = 100;
+		int particleSpeed = 1; 
 		//TODO: NEED TO FIX THE ARC OF SPRAY FOR PARTICLE GENERATOR
 		ParticleGenerator testParticle = new ParticleGenerator(
 				player.x, 
 				player.y, 
-				10, 
-				10, 
+				particleDensity, 
+				particleSize, 
 				GameObject.Direction.UP, 
-				90, 
-				50, 
-				5, 
-				10, Color.black);
-		testParticle.setParticleGravity(1);
+				particleAngle, 
+				particleLife, 
+				particleFrequency, 
+				particleSpeed, 
+				Color.black);
+		//testParticle.setParticleGravity(1);
+		testParticle.setIsGrowParticle(true);
+		testParticle.growRate = 0.1;
 		gameObjs.add(testParticle);
 		
 		UIObjs = new ArrayList<UIObject>();
