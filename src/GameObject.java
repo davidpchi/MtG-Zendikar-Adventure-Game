@@ -13,6 +13,10 @@ public abstract class GameObject {
 	Image image;
 	boolean isSolid;
 	
+	public enum Direction {
+	    NORTH, SOUTH, EAST, WEST, UP, DOWN, LEFT, RIGHT
+	}
+	
 	public GameObject() {
 		this(0,0,32,32, false);
 	}

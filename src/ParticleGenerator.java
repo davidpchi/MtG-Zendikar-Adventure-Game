@@ -1,31 +1,29 @@
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.util.ArrayList;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.Particle;
+import java.util.Random;
 
 
 public class ParticleGenerator extends GameObject{
-	
-	public enum Direction {
-	    NORTH, SOUTH, EAST, WEST, UP, DOWN, LEFT, RIGHT
-	}
-	
+
 	int particleDensity;
 	int particleSize;
 	Direction particleDirection;
 	int particleAngle;
 	int particleLife;
 	int particleFrequency;
+	int particleSpeed;
 	Image particleImage;
 	Color particleColor;
 	ArrayList<ParticleGeneratorParticle> particles; 
 	int particleGravity;
 	
 	private int timerVar;
+	private Random generator;
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, Image particleImage) {
+	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Image particleImage) {
 		super(x,y);
 		
 		this.particleDensity = particleDensity;
@@ -36,12 +34,15 @@ public class ParticleGenerator extends GameObject{
 		particleColor = Color.black;
 		this.particleLife = particleLife;
 		this.particleFrequency = particleFrequency;
+		this.particleSpeed = particleSpeed;
 		particles = new ArrayList<ParticleGeneratorParticle>();
 		particleGravity = 0; 
+		
 		timerVar = 0;
+		generator = new Random();
 	}
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, Color particleColor) {
+	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Color particleColor) {
 		super(x,y);
 		
 		this.particleDensity = particleDensity;
@@ -52,14 +53,16 @@ public class ParticleGenerator extends GameObject{
 		this.particleColor = particleColor;
 		this.particleLife = particleLife;
 		this.particleFrequency = particleFrequency;
+		this.particleSpeed = particleSpeed;
 		particles = new ArrayList<ParticleGeneratorParticle>();
 		particleGravity = 0;
 		
 		timerVar = 0;
+		generator = new Random();
 	}
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency) {
-		this(x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, Color.black);
+	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed) {
+		this(x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black);
 	}
 	
 	public void update() {
@@ -68,13 +71,24 @@ public class ParticleGenerator extends GameObject{
 			timerVar++;
 		}
 		else {
-			//TODO: using direction and angle, calculate a point to have the particle move toward
-			Point targetPoint = new Point();
-			
 			//if we haven't hit the density cap, add a particle
 			if (particles.size() <= particleDensity) {
-				//TODO: finish ParticleGeneratorParticle constructor
-				particles.add(new ParticleGeneratorParticle());
+				int targetY = 0; 
+				int targetX = 0;
+				
+				//TODO: PROGRAM OTHER DIRECTIONS SUCH AS DOWN, LEFT, ETC
+				if (particleDirection == Direction.UP || particleDirection == Direction.NORTH) {
+					targetY = y - 1000;
+					int angleVal = generator.nextInt(particleAngle);
+					System.out.println(angleVal + " - " + Math.tan(angleVal/2.0));
+					if (generator.nextBoolean())
+						targetX = x + (int) (Math.tan(angleVal/2.0) * 1000.0);
+					else
+						targetX = x - (int) (Math.tan(angleVal/2.0) * 1000.0);
+				}
+				Point targetPoint = new Point(targetX, targetY);
+				
+				particles.add(new ParticleGeneratorParticle(x-particleSize/2, y-particleSize/2, particleSize, particleLife, particleSpeed, particleGravity, targetPoint, particleColor, particleImage));
 			}
 			timerVar = 0;
 		}
@@ -85,11 +99,20 @@ public class ParticleGenerator extends GameObject{
 			if (particles.get(i).flaggedForDelete) {
 				particlesToDelete.add(particles.get(i));
 			}
+			else {
+				particles.get(i).update();
+			}
 		}
 		
 		//delete all particles that are marked for deletion
 		for (int i = 0; i < particlesToDelete.size(); i++) {
 			particles.remove(particlesToDelete.get(i));
+		}
+	}
+	
+	public void paint(RenderCamera cam, Graphics g) {
+		for (int i = 0 ;i < particles.size(); i++) {
+			particles.get(i).paint(cam, g);
 		}
 	}
 	

@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-public class GamePanel extends JPanel{
+public class GamePanel extends JPanel {
+	
 	Timer frameCounter; 
 	int test1;
 	int myWidth;
@@ -62,6 +63,20 @@ public class GamePanel extends JPanel{
 		gameObjs.add(tempWall);
 		
 		gameObjs.add(player);
+		
+		//TODO: NEED TO FIX THE ARC OF SPRAY FOR PARTICLE GENERATOR
+		ParticleGenerator testParticle = new ParticleGenerator(
+				player.x, 
+				player.y, 
+				10, 
+				10, 
+				GameObject.Direction.UP, 
+				90, 
+				50, 
+				5, 
+				10, Color.black);
+		testParticle.setParticleGravity(1);
+		gameObjs.add(testParticle);
 		
 		UIObjs = new ArrayList<UIObject>();
 		//DEBUG: add some temporary text to showcase UI
