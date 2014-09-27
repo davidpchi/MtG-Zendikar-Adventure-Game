@@ -84,7 +84,12 @@ public class ParticleGeneratorParticle extends GameObject{
 	}
 	
 	public void paint(RenderCamera cam, Graphics g) {
-		g.setColor(particleColor);
-		g.fillOval(x - cam.x, y - cam.y, (int)particleSize, (int)particleSize);
+		if (particleImage == null) {
+			g.setColor(particleColor);
+			g.fillOval(x - cam.x, y - cam.y, (int)particleSize, (int)particleSize);
+		}
+		else {
+			g.drawImage(particleImage, x - cam.x, y - cam.y, null);
+		}
 	}
 }

@@ -1,6 +1,8 @@
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -66,10 +68,10 @@ public class GamePanel extends JPanel {
 		
 		int particleDensity = 10;
 		int particleSize = 10;
-		int particleAngle = 45; 
+		int particleAngle = 90; 
 		int particleLife = 100;
-		int particleFrequency = 100;
-		int particleSpeed = 1; 
+		int particleFrequency = 50;
+		int particleSpeed = 2; 
 		//TODO: NEED TO FIX THE ARC OF SPRAY FOR PARTICLE GENERATOR
 		ParticleGenerator testParticle = new ParticleGenerator(
 				player.x, 
@@ -81,7 +83,7 @@ public class GamePanel extends JPanel {
 				particleLife, 
 				particleFrequency, 
 				particleSpeed, 
-				Color.black);
+				Toolkit.getDefaultToolkit().getImage(MainPlayer.class.getResource("fire.gif")));
 		//testParticle.setParticleGravity(1);
 		testParticle.setIsGrowParticle(true);
 		testParticle.growRate = 0.1;
