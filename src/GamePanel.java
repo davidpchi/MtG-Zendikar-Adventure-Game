@@ -66,6 +66,7 @@ public class GamePanel extends JPanel {
 		
 		gameObjs.add(player);
 		
+		/*
 		int particleDensity = 10;
 		int particleSize = 10;
 		int particleAngle = 90; 
@@ -88,6 +89,7 @@ public class GamePanel extends JPanel {
 		testParticle.setIsGrowParticle(true);
 		testParticle.growRate = 0.1;
 		gameObjs.add(testParticle);
+		*/
 		
 		UIObjs = new ArrayList<UIObject>();
 		//DEBUG: add some temporary text to showcase UI
