@@ -25,6 +25,7 @@ public class GamePanel extends JPanel {
 	
 	ArrayList<GameObject> gameObjs;
 	ArrayList<UIObject> UIObjs;
+	UIMenu tempMenu;
 	
 	public GamePanel(int worldWidth, int worldHeight, int camWidth, int camHeight) {
 		frameCounter = new Timer(10, new drawActionListener());
@@ -91,10 +92,20 @@ public class GamePanel extends JPanel {
 		gameObjs.add(testParticle);
 		*/
 		
+		tempMenu = new UIMenu(50,10);
+		UIMenuItem item1 = new UIMenuItem(50, 10, 32, 32, "temp1");
+		UIMenuItem item2 = new UIMenuItem(50, 30, 32, 32, "temp2");
+		UIMenuItem item3 = new UIMenuItem(50, 50, 32, 32, "temp3");
+		
+		tempMenu.addMenuItem(item1);
+		tempMenu.addMenuItem(item2);
+		tempMenu.addMenuItem(item3);
+		
 		UIObjs = new ArrayList<UIObject>();
 		//DEBUG: add some temporary text to showcase UI
 		UIObjs.add(new UIText(10, 32, "This is a test"));
 		UIObjs.add(new UIHealthbar(10, 40, 128, 16));
+		UIObjs.add(tempMenu);
 		
 		//DEBUG: start running the game immediately
 		start();
@@ -171,6 +182,7 @@ public class GamePanel extends JPanel {
 			if (key == KeyEvent.VK_W) {
 				System.out.println("w pressed");
 				player.upPressed();
+				tempMenu.selectPrevItem();
 			}
 			if (key == KeyEvent.VK_A) {
 				System.out.println("a pressed");
@@ -179,6 +191,7 @@ public class GamePanel extends JPanel {
 			if (key == KeyEvent.VK_S) {
 				System.out.println("s pressed");
 				player.downPressed();
+				tempMenu.selectNextItem();
 			}
 			if (key == KeyEvent.VK_D) {
 				System.out.println("d pressed");

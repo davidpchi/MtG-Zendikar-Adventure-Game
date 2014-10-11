@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -35,10 +36,20 @@ public class UIMenuItem extends UIObject{
 	
 	public void paint(Graphics g) {
 		if (isSelected) {
-			g.drawImage(selectedImage, x, y, null);
+			if (selectedImage != null)
+				g.drawImage(selectedImage, x, y, null);
+			else {
+				g.setColor(Color.RED);
+				g.drawString(displayText, x, y);
+			}
 		}
 		else {
-			g.drawImage(defaultImage, x, y, null);
+			if (selectedImage != null)
+				g.drawImage(defaultImage, x, y, null);
+			else {
+				g.setColor(Color.BLACK);
+				g.drawString(displayText, x, y);
+			}
 		}
 	}
 }

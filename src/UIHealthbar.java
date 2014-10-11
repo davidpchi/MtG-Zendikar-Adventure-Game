@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.util.Date;
+import java.util.Random;
 
 
 public class UIHealthbar extends UIObject{
