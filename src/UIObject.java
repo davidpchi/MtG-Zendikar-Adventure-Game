@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Point;
 
 
 public abstract class UIObject {
@@ -24,5 +25,12 @@ public abstract class UIObject {
 	
 	public void paint(Graphics g) {
 		g.drawRect(x, y, width, height);
+	}
+	
+	public static boolean isClickInsideBounds(Point point, UIObject obj) {
+		return ((point.x > obj.x) &&
+				(point.y > obj.y)&&
+				(point.y < obj.y + obj.height) &&
+				(point.x < obj.x + obj.width));
 	}
 }
