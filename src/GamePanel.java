@@ -156,6 +156,17 @@ public class GamePanel extends JPanel {
 	public void paint(Graphics g) {
 		super.paint(g);
 		
+		//draw background grid
+		for (int i = 0; i < myWidth; i += 32) {
+			g.setColor(Color.LIGHT_GRAY);
+			g.drawLine(i - cam.x, 0 - cam.y, i - cam.x, myHeight - cam.y);
+		}
+		
+		for (int i = 0; i < myHeight; i += 32) {
+			g.setColor(Color.LIGHT_GRAY);
+			g.drawLine(0 - cam.x, i - cam.y, myWidth - cam.x, i - cam.y);
+		}
+		
 		//need to re-factor rendering based on camera and world space
 		for (int i = 0; i < gameObjs.size(); i++) {
 			gameObjs.get(i).paint(cam, g);
