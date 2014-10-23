@@ -12,20 +12,22 @@ public abstract class GameObject {
 	int xVel;
 	Image image;
 	boolean isSolid;
+	GamePanel parent;
 	
 	public enum Direction {
 	    NORTH, SOUTH, EAST, WEST, UP, DOWN, LEFT, RIGHT
 	}
 	
-	public GameObject() {
-		this(0,0,32,32, false);
+	public GameObject(GamePanel parent) {
+		this(parent, 0,0,32,32, false);
 	}
 	
-	public GameObject(int x, int y) {
-		this(x,y,32,32, false);
+	public GameObject(GamePanel parent, int x, int y) {
+		this(parent, x,y,32,32, false);
 	}
 
-	public GameObject(int x, int y, int width, int height, boolean isSolid) {
+	public GameObject(GamePanel parent, int x, int y, int width, int height, boolean isSolid) {
+		this.parent = parent;
 		this.x = x;
 		this.y = y;
 		this.width = width;

@@ -19,6 +19,11 @@ public class GamePanel extends JPanel {
 	int myWidth;
 	int myHeight;
 	
+	boolean isLeftPressed;
+	boolean isRightPressed;
+	boolean isUpPressed;
+	boolean isDownPressed;
+	
 	RenderCamera cam;
 	
 	MainPlayer player;
@@ -41,28 +46,28 @@ public class GamePanel extends JPanel {
 		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
-		player = new MainPlayer(cam.width / 2, cam.height / 2, this);
+		player = new MainPlayer(this, cam.width / 2, cam.height / 2);
 		
 		//update camera with player in the center
 		cam.x = player.x - cam.width / 2;
 		cam.y = player.y - cam.height / 2;
 		
-		WallObject tempWall = new WallObject(0,250,500,64, null);
+		WallObject tempWall = new WallObject(this, 0,250,500,64, null);
 		gameObjs.add(tempWall);
 		
-		tempWall = new WallObject(250,200,500,64, null);
+		tempWall = new WallObject(this, 250,200,500,64, null);
 		gameObjs.add(tempWall);
 
-		tempWall = new WallObject(400,150,500,64, null);
+		tempWall = new WallObject(this, 400,150,500,64, null);
 		gameObjs.add(tempWall);
 		
-		tempWall = new WallObject(600,150,500,64, null);
+		tempWall = new WallObject(this, 600,150,500,64, null);
 		gameObjs.add(tempWall);
 		
-		tempWall = new WallObject(1000,150,500,64, null);
+		tempWall = new WallObject(this, 1000,150,500,64, null);
 		gameObjs.add(tempWall);
 		
-		tempWall = new WallObject(1200,150,500,64, null);
+		tempWall = new WallObject(this, 1200,150,500,64, null);
 		gameObjs.add(tempWall);
 		
 		gameObjs.add(player);
@@ -177,6 +182,38 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
+	public void leftPressed() {
+		isLeftPressed = true;
+	}
+	
+	public void rightPressed() {
+		isRightPressed = true;
+	}
+	
+	public void upPressed() {
+		isUpPressed = true;
+	}
+	
+	public void downPressed() {
+		isDownPressed = true;
+	}
+	
+	public void leftReleased() {
+		isLeftPressed = false;
+	}
+	
+	public void rightReleased() {
+		isRightPressed = false;
+	}
+	
+	public void upReleased() {
+		isUpPressed = false;
+	}
+	
+	public void downReleased() {
+		isDownPressed = false;
+	}
+	
 	private class drawActionListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -192,21 +229,21 @@ public class GamePanel extends JPanel {
 			
 			if (key == KeyEvent.VK_W) {
 				System.out.println("w pressed");
-				player.upPressed();
+				upPressed();
 				tempMenu.selectPrevItem();
 			}
 			if (key == KeyEvent.VK_A) {
 				System.out.println("a pressed");
-				player.leftPressed();
+				leftPressed();
 			}
 			if (key == KeyEvent.VK_S) {
 				System.out.println("s pressed");
-				player.downPressed();
+				downPressed();
 				tempMenu.selectNextItem();
 			}
 			if (key == KeyEvent.VK_D) {
 				System.out.println("d pressed");
-				player.rightPressed();
+				rightPressed();
 			}
 		}
 		
@@ -215,19 +252,19 @@ public class GamePanel extends JPanel {
 			
 			if (key == KeyEvent.VK_W) {
 				System.out.println("w released");
-				player.upReleased();
+				upReleased();
 			}
 			if (key == KeyEvent.VK_A) {
 				System.out.println("a released");
-				player.leftReleased();
+				leftReleased();
 			}
 			if (key == KeyEvent.VK_S) {
 				System.out.println("s released");
-				player.downReleased();
+				downReleased();
 			}
 			if (key == KeyEvent.VK_D) {
 				System.out.println("d released");
-				player.rightReleased();
+				rightReleased();
 			}
 		}
 		

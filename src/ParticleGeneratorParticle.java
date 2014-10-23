@@ -22,6 +22,7 @@ public class ParticleGeneratorParticle extends GameObject{
 	private double moveAngle;
 	
 	public ParticleGeneratorParticle(
+			GamePanel parent,
 			int x,
 			int y,
 			int particleSize,
@@ -33,8 +34,7 @@ public class ParticleGeneratorParticle extends GameObject{
 			Point particleTarget,
 			Color particleColor,
 			Image particleImage) {
-		this.x = x;
-		this.y = y;
+		super(parent, x, y);
 		this.particleSize = particleSize;
 		this.particleLife = particleLife;
 		this.particleSpeed = particleSpeed;
@@ -52,8 +52,8 @@ public class ParticleGeneratorParticle extends GameObject{
 		moveAngle = Math.atan2(particleTarget.y - y, particleTarget.x - x);
 	}
 	
-	public ParticleGeneratorParticle(int x, int y) {
-		this(x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
+	public ParticleGeneratorParticle(GamePanel parent, int x, int y) {
+		this(parent, x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
 	}
 	
 	public void setGrowRate(double growRate) {

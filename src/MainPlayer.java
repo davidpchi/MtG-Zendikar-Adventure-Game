@@ -7,18 +7,13 @@ import java.awt.event.KeyListener;
 
 public class MainPlayer extends GameObject{
 	
-	private boolean isLeftPressed;
-	private boolean isRightPressed;
-	private boolean isUpPressed;
-	private boolean isDownPressed;
 	private boolean isJumping;
-	private GamePanel parent;
 	
 	private boolean isFacingRight;
 	private boolean isFacingLeft;
 
-	public MainPlayer(int x, int y, GamePanel parent) {
-		super(x,y,32,32, false);
+	public MainPlayer(GamePanel parent, int x, int y) {
+		super(parent, x,y,32,32, false);
 		this.parent = parent;
 		Image myImage = Toolkit.getDefaultToolkit().getImage(MainPlayer.class.getResource("player.gif")); 
 		setImage(myImage);
@@ -43,12 +38,12 @@ public class MainPlayer extends GameObject{
 	}
 	
 	private void processMove() {
-		if (isLeftPressed) {
+		if (parent.isLeftPressed) {
 			xVel = -5;
 			isFacingLeft = true;
 			isFacingRight = false;
 		}
-		else if (isRightPressed) {
+		else if (parent.isRightPressed) {
 			xVel = 5;
 			isFacingLeft = false;
 			isFacingRight = true;
@@ -66,7 +61,7 @@ public class MainPlayer extends GameObject{
 
 		
 		//jump
-		if (isUpPressed) {
+		if (parent.isUpPressed) {
 			if (isJumping == false) {
 				isJumping = true;
 				yVel = 20;
@@ -91,37 +86,5 @@ public class MainPlayer extends GameObject{
 		}
 		//if (isDownPressed)
 		//	y = y + 5;
-	}
-	
-	public void leftPressed() {
-		isLeftPressed = true;
-	}
-	
-	public void rightPressed() {
-		isRightPressed = true;
-	}
-	
-	public void upPressed() {
-		isUpPressed = true;
-	}
-	
-	public void downPressed() {
-		isDownPressed = true;
-	}
-	
-	public void leftReleased() {
-		isLeftPressed = false;
-	}
-	
-	public void rightReleased() {
-		isRightPressed = false;
-	}
-	
-	public void upReleased() {
-		isUpPressed = false;
-	}
-	
-	public void downReleased() {
-		isDownPressed = false;
 	}
 }

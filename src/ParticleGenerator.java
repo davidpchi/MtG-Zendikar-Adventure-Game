@@ -31,16 +31,16 @@ public class ParticleGenerator extends GameObject{
 	private int targetX;
 	private int targetY;
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Image particleImage) {
-		this(x,y,particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black, particleImage);
+	public ParticleGenerator(GamePanel parent, int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Image particleImage) {
+		this(parent, x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black, particleImage);
 	}
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Color particleColor) {
-		this(x,y,particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, particleColor, null);
+	public ParticleGenerator(GamePanel parent, int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Color particleColor) {
+		this(parent, x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, particleColor, null);
 	}
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Color particleColor, Image particleImage) {
-		super(x,y);
+	public ParticleGenerator(GamePanel parent, int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed, Color particleColor, Image particleImage) {
+		super(parent, x, y);
 
 		this.particleDensity = particleDensity;
 		this.particleSize = particleSize;
@@ -64,8 +64,8 @@ public class ParticleGenerator extends GameObject{
 	}
  
 	
-	public ParticleGenerator(int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed) {
-		this(x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black);
+	public ParticleGenerator(GamePanel parent, int x, int y, int particleDensity, int particleSize, Direction particleDirection, int particleAngle, int particleLife, int particleFrequency, int particleSpeed) {
+		this(parent, x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black);
 	}
 	
 	public void update() {
@@ -117,6 +117,7 @@ public class ParticleGenerator extends GameObject{
 				Point targetPoint = new Point(targetX, targetY);
 				
 				ParticleGeneratorParticle newParticle = new ParticleGeneratorParticle(
+						parent, 
 						x-particleSize/2,
 						y-particleSize/2,
 						particleSize,
