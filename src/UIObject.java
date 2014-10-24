@@ -8,15 +8,18 @@ public abstract class UIObject {
 	int width;
 	int height;
 	
-	public UIObject(int x, int y, int width, int height) {
+	GamePanel parent;
+	
+	public UIObject(GamePanel parent, int x, int y, int width, int height) {
+		this.parent = parent;
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
 	}
 	
-	public UIObject(int x, int y) {
-		this(x,y,0,0);
+	public UIObject(GamePanel parent, int x, int y) {
+		this(parent, x, y, 0, 0);
 	}
 	
 	public void update() {

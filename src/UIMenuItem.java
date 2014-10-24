@@ -11,24 +11,24 @@ public class UIMenuItem extends UIObject{
 	boolean isSelected;
 	Image selectedImage;
 	
-	public UIMenuItem(int x, int y, int width, int height) {
-		this(x, y, width, height, "", null);
+	public UIMenuItem(GamePanel parent, int x, int y, int width, int height) {
+		this(parent, x, y, width, height, "", null);
 	}
 	
-	public UIMenuItem(int x, int y, int width, int height, Image image) {
-		this(x, y, width, height, "", image);
+	public UIMenuItem(GamePanel parent, int x, int y, int width, int height, Image image) {
+		this(parent, x, y, width, height, "", image);
 	}
 	
-	public UIMenuItem(int x, int y, int width, int height, String text) {
-		this(x, y, width, height, text, null);
+	public UIMenuItem(GamePanel parent, int x, int y, int width, int height, String text) {
+		this(parent, x, y, width, height, text, null);
 	}
 	
-	public UIMenuItem(int x, int y, int width, int height, String text, Image image) {
-		this(x, y, width, height, text, image, image);
+	public UIMenuItem(GamePanel parent, int x, int y, int width, int height, String text, Image image) {
+		this(parent, x, y, width, height, text, image, image);
 	}
 	
-	public UIMenuItem(int x, int y, int width, int height, String text, Image defaultImage, Image selectedImage) {
-		super(x, y, width, height);
+	public UIMenuItem(GamePanel parent, int x, int y, int width, int height, String text, Image defaultImage, Image selectedImage) {
+		super(parent, x, y, width, height);
 		displayText = text;
 		this.defaultImage = defaultImage;
 		this.selectedImage = selectedImage;

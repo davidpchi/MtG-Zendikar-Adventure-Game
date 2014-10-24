@@ -6,12 +6,12 @@ public class UIText extends UIObject{
 	String displayText;
 	Color textColor;
 	
-	public UIText(int x, int y, String displayText) {
-		this(x,y,displayText, Color.BLACK);
+	public UIText(GamePanel parent, int x, int y, String displayText) {
+		this(parent, x, y, displayText, Color.BLACK);
 	}
 	
-	public UIText(int x, int y, String displayText, Color textColor) {
-		super(x,y);
+	public UIText(GamePanel parent, int x, int y, String displayText, Color textColor) {
+		super(parent, x, y);
 		this.displayText = displayText;
 		this.textColor = textColor;
 	}

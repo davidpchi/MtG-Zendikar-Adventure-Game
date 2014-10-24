@@ -11,16 +11,16 @@ public class UIHealthbar extends UIObject{
 	Color bgColor;
 	int percent;
 	
-	public UIHealthbar(int x, int y, int width, int height, Color startColor, Color endColor, Color bgColor) {
-		super(x, y, width, height);
+	public UIHealthbar(GamePanel parent, int x, int y, int width, int height, Color startColor, Color endColor, Color bgColor) {
+		super(parent, x, y, width, height);
 		this.startColor = startColor;
 		this.endColor = endColor;
 		this.bgColor = bgColor;
 		percent = 100;
 	}
 	
-	public UIHealthbar(int x, int y, int width, int height) {
-		this(x, y, width, height, Color.red, Color.green, Color.black);
+	public UIHealthbar(GamePanel parent, int x, int y, int width, int height) {
+		this(parent, x, y, width, height, Color.red, Color.green, Color.black);
 	}
 	
 	public void update() {
