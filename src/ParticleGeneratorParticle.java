@@ -4,6 +4,7 @@ import java.awt.Image;
 import java.awt.Point;
 
 
+
 public class ParticleGeneratorParticle extends GameObject{
 	boolean flaggedForDelete;
 	double particleSize;

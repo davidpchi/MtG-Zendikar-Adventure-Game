@@ -1,16 +1,6 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
-
-import javax.swing.JPanel;
-import javax.swing.Timer;
 
 public class DemoScene extends GamePanel {
 	
@@ -46,6 +36,8 @@ public class DemoScene extends GamePanel {
 		gameObjs.add(tempWall);
 		
 		gameObjs.add(player);
+		
+		gameObjs.add(new ChargeSphere(this, 100, 100));
 		
 		/*
 		int particleDensity = 10;

@@ -1,16 +1,17 @@
-import java.awt.Color;
+
+
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
+
 
 public abstract class GamePanel extends JPanel {
 	
@@ -23,11 +24,14 @@ public abstract class GamePanel extends JPanel {
 	boolean isUpPressed;
 	boolean isDownPressed;
 	
-	RenderCamera cam;
+	protected RenderCamera cam;
 	
 	ArrayList<GameObject> gameObjs;
 	ArrayList<UIObject> UIObjs;
+	ArrayList<KeyEvent> boundKeys;
 	
+	Random randomGen; 
+
 	public GamePanel(int worldWidth, int worldHeight, int camWidth, int camHeight) {
 		frameCounter = new Timer(10, new drawActionListener());
 		
@@ -42,7 +46,9 @@ public abstract class GamePanel extends JPanel {
 		
 		gameObjs = new ArrayList<GameObject>();
 		UIObjs = new ArrayList<UIObject>();
+		boundKeys = new ArrayList<KeyEvent>();
 		
+		randomGen = new Random();
 		//NOTE: Does not start the game immediately
 	}
 	
