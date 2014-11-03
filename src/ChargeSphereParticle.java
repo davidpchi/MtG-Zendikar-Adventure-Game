@@ -1,6 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+import com.zen_main.GameObject;
+import com.zen_main.GamePanel;
+import com.zen_main.RenderCamera;
+
 
 public class ChargeSphereParticle extends GameObject{
 	
@@ -18,7 +22,7 @@ public class ChargeSphereParticle extends GameObject{
 		flaggedForDelete = false;
 		width = parent.randomGen.nextInt(16);
 		height = width;
-		particleSpeed = 10;
+		particleSpeed = 4;
 	}
 	
 	public void update() {

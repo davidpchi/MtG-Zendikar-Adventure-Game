@@ -1,3 +1,5 @@
+package com.zen_main;
+
 
 
 import java.awt.Color;
@@ -6,15 +8,15 @@ import java.awt.Image;
 
 
 public abstract class GameObject {
-	int x;
-	int y;
-	int width;
-	int height;
-	int yVel;
-	int xVel;
-	Image image;
-	boolean isSolid;
-	GamePanel parent;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
+	public int yVel;
+	public int xVel;
+	public Image image;
+	public boolean isSolid;
+	protected GamePanel parent;
 	
 	public enum Direction {
 	    NORTH, SOUTH, EAST, WEST, UP, DOWN, LEFT, RIGHT

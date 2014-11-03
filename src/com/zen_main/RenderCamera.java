@@ -1,13 +1,14 @@
+package com.zen_main;
 
 
 public class RenderCamera {
 
-	int x;
-	int y;
-	int width;
-	int height;
-	int renderEdge;
-	int followSpeed;
+	public int x;
+	public int y;
+	public int width;
+	public int height;
+	public int renderEdge;
+	public int followSpeed;
 	
 	public RenderCamera(int x, int y, int width, int height, int renderEdge, int followSpeed) {
 		this.x = x;

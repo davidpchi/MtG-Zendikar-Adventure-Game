@@ -2,8 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+
+import com.zen_main.GameObject;
+import com.zen_main.GamePanel;
+import com.zen_main.RenderCamera;
 
 
 public class MainPlayer extends GameObject{
@@ -60,7 +62,6 @@ public class MainPlayer extends GameObject{
 		
 		x = x + xVel;
 
-		
 		//jump
 		if (parent.isUpPressed) {
 			if (isJumping == false) {

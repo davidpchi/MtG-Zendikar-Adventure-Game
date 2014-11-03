@@ -1,3 +1,4 @@
+package com.default_ui;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -5,7 +6,8 @@ import java.util.ArrayList;
 
 import javax.swing.Timer;
 
-
+import com.zen_main.GamePanel;
+import com.zen_main.UIObject;
 
 public class UIMenu extends UIObject{
 

@@ -2,6 +2,13 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import com.default_ui.UIHealthbar;
+import com.default_ui.UIMenu;
+import com.default_ui.UIMenuItem;
+import com.default_ui.UIText;
+import com.zen_main.GamePanel;
+import com.zen_main.UIObject;
+
 public class DemoScene extends GamePanel {
 	
 	MainPlayer player;

@@ -1,3 +1,5 @@
+package com.zen_main;
+
 
 
 import java.awt.Dimension;
@@ -13,24 +15,25 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
+
 public abstract class GamePanel extends JPanel {
 	
-	Timer frameCounter; 
-	int myWidth;
-	int myHeight;
+	protected Timer frameCounter; 
+	public int myWidth;
+	public int myHeight;
 	
-	boolean isLeftPressed;
-	boolean isRightPressed;
-	boolean isUpPressed;
-	boolean isDownPressed;
+	public boolean isLeftPressed;
+	public boolean isRightPressed;
+	public boolean isUpPressed;
+	public boolean isDownPressed;
 	
-	protected RenderCamera cam;
+	public RenderCamera cam;
 	
-	ArrayList<GameObject> gameObjs;
-	ArrayList<UIObject> UIObjs;
-	ArrayList<KeyEvent> boundKeys;
+	public ArrayList<GameObject> gameObjs;
+	public ArrayList<UIObject> UIObjs;
+	protected ArrayList<KeyEvent> boundKeys;
 	
-	Random randomGen; 
+	public Random randomGen; 
 
 	public GamePanel(int worldWidth, int worldHeight, int camWidth, int camHeight) {
 		frameCounter = new Timer(10, new drawActionListener());

@@ -5,6 +5,10 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.zen_main.GameObject;
+import com.zen_main.GamePanel;
+import com.zen_main.RenderCamera;
+
 
 
 public class ParticleGenerator extends GameObject{
@@ -69,6 +73,10 @@ public class ParticleGenerator extends GameObject{
 		this(parent, x, y, particleDensity, particleSize, particleDirection, particleAngle, particleLife, particleFrequency, particleSpeed, Color.black);
 	}
 	
+	public ParticleGenerator(GamePanel parent, int x, int y) {
+		this(parent, x, y, 0, 0, null, 0, 0, 0, 0, Color.black);
+	}
+	
 	public void update() {
 		//add particles if we haven't hit the particle Density cap
 		if (timerVar != particleFrequency) {
@@ -76,64 +84,64 @@ public class ParticleGenerator extends GameObject{
 		}
 		else {
 			//if we haven't hit the density cap, add a particle
-			if (particles.size() <= particleDensity) {
-				targetY = 0; 
-				targetX = 0;
-				
-				int angleVal = (int)Math.toRadians(generator.nextInt(particleAngle));
-				
-				if (particleDirection == Direction.UP || particleDirection == Direction.NORTH) {
-					targetY = y - 1000;
-					
-					if (generator.nextBoolean())
-						targetX = x + (int) (Math.tan(angleVal/2.0) * 1000.0);
-					else
-						targetX = x - (int) (Math.tan(angleVal/2.0) * 1000.0);
-				}
-				else if (particleDirection == Direction.LEFT || particleDirection == Direction.WEST) {
-					targetX = x - 1000;
-					
-					if (generator.nextBoolean())
-						targetY = y + (int) (Math.tan(angleVal/2.0) * 1000.0);
-					else
-						targetY = y - (int) (Math.tan(angleVal/2.0) * 1000.0);
-				}
-				else if (particleDirection == Direction.RIGHT || particleDirection == Direction.EAST){
-					targetX = x + 1000;
-					
-					if (generator.nextBoolean())
-						targetY = y + (int) (Math.tan(angleVal/2.0) * 1000.0);
-					else
-						targetY = y - (int) (Math.tan(angleVal/2.0) * 1000.0);
-				}
-				else if (particleDirection == Direction.DOWN || particleDirection == Direction.SOUTH){
-					targetY = y + 1000;
-					
-					if (generator.nextBoolean())
-						targetX = x + (int) (Math.tan(angleVal/2.0) * 1000.0);
-					else
-						targetX = x - (int) (Math.tan(angleVal/2.0) * 1000.0);
-				}
-				
-				Point targetPoint = new Point(targetX, targetY);
-				
-				ParticleGeneratorParticle newParticle = new ParticleGeneratorParticle(
-						parent, 
-						x-particleSize/2,
-						y-particleSize/2,
-						particleSize,
-						particleLife,
-						particleSpeed,
-						particleGravity,
-						isSolidParticle,
-						isGrowParticle,
-						targetPoint,
-						particleColor,
-						particleImage);
-				newParticle.setGrowRate(growRate);
-				
-				particles.add(newParticle);
-			}
+//			if (particles.size() <= particleDensity) {
+//				targetY = 0; 
+//				targetX = 0;
+//				
+//				int angleVal = (int)Math.toRadians(generator.nextInt(particleAngle));
+//				
+//				if (particleDirection == Direction.UP || particleDirection == Direction.NORTH) {
+//					targetY = y - 1000;
+//					
+//					if (generator.nextBoolean())
+//						targetX = x + (int) (Math.tan(angleVal/2.0) * 1000.0);
+//					else
+//						targetX = x - (int) (Math.tan(angleVal/2.0) * 1000.0);
+//				}
+//				else if (particleDirection == Direction.LEFT || particleDirection == Direction.WEST) {
+//					targetX = x - 1000;
+//					
+//					if (generator.nextBoolean())
+//						targetY = y + (int) (Math.tan(angleVal/2.0) * 1000.0);
+//					else
+//						targetY = y - (int) (Math.tan(angleVal/2.0) * 1000.0);
+//				}
+//				else if (particleDirection == Direction.RIGHT || particleDirection == Direction.EAST){
+//					targetX = x + 1000;
+//					
+//					if (generator.nextBoolean())
+//						targetY = y + (int) (Math.tan(angleVal/2.0) * 1000.0);
+//					else
+//						targetY = y - (int) (Math.tan(angleVal/2.0) * 1000.0);
+//				}
+//				else if (particleDirection == Direction.DOWN || particleDirection == Direction.SOUTH){
+//					targetY = y + 1000;
+//					
+//					if (generator.nextBoolean())
+//						targetX = x + (int) (Math.tan(angleVal/2.0) * 1000.0);
+//					else
+//						targetX = x - (int) (Math.tan(angleVal/2.0) * 1000.0);
+//				}
+//				
+//				Point targetPoint = new Point(targetX, targetY);
+//				
+//				ParticleGeneratorParticle newParticle = new ParticleGeneratorParticle(
+//						parent, 
+//						x-particleSize/2,
+//						y-particleSize/2,
+//						particleSize,
+//						particleLife,
+//						particleSpeed,
+//						particleGravity,
+//						isSolidParticle,
+//						isGrowParticle,
+//						targetPoint,
+//						particleColor,
+//						particleImage);
+//				newParticle.setGrowRate(growRate);
+//				
+//				particles.add(newParticle);
+//			}
 			timerVar = 0;
 		}
 		
@@ -160,7 +168,7 @@ public class ParticleGenerator extends GameObject{
 		}
 		
 		//TODO: DEBUG TO SEE RANGE OF PARTICLES
-		g.drawLine(x-cam.x,y-cam.y,targetX-cam.x, targetY-cam.y);
+		//g.drawLine(x-cam.x,y-cam.y,targetX-cam.x, targetY-cam.y);
 	}
 	
 	public void setParticleGravity(int particleGravity) {

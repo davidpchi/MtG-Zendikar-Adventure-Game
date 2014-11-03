@@ -2,6 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 
+import com.zen_main.GameObject;
+import com.zen_main.GamePanel;
+import com.zen_main.RenderCamera;
+
 
 public class ChargeSphere extends GameObject{
 	

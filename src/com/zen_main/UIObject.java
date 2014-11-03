@@ -1,16 +1,15 @@
+package com.zen_main;
 
 import java.awt.Graphics;
 import java.awt.Point;
 
-
-
 public abstract class UIObject {
-	int x;
-	int y; 
-	int width;
-	int height;
+	protected int x;
+	protected int y; 
+	protected int width;
+	protected int height;
 	
-	GamePanel parent;
+	protected GamePanel parent;
 	
 	public UIObject(GamePanel parent, int x, int y, int width, int height) {
 		this.parent = parent;

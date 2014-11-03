@@ -1,6 +1,10 @@
+package com.default_ui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+
+import com.zen_main.GamePanel;
+import com.zen_main.UIObject;
 
 
 

@@ -3,11 +3,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 
+import com.zen_main.GameObject;
+import com.zen_main.GamePanel;
+import com.zen_main.RenderCamera;
+
 
 
 public class ParticleGeneratorParticle extends GameObject{
 	boolean flaggedForDelete;
-	double particleSize;
 	int particleLife;
 	int particleSpeed;
 	int particleGravity;
@@ -17,10 +20,10 @@ public class ParticleGeneratorParticle extends GameObject{
 	boolean isSolidParticle;
 	boolean isGrowParticle;
 	
-	double growRate;
+	int growRate;
 	
 	private double gravPull;
-	private double moveAngle;
+	protected double moveAngle;
 	
 	public ParticleGeneratorParticle(
 			GamePanel parent,
@@ -36,7 +39,8 @@ public class ParticleGeneratorParticle extends GameObject{
 			Color particleColor,
 			Image particleImage) {
 		super(parent, x, y);
-		this.particleSize = particleSize;
+		this.width = particleSize;
+		this.height = particleSize;
 		this.particleLife = particleLife;
 		this.particleSpeed = particleSpeed;
 		this.particleGravity = particleGravity;
@@ -54,18 +58,26 @@ public class ParticleGeneratorParticle extends GameObject{
 	}
 	
 	public ParticleGeneratorParticle(GamePanel parent, int x, int y) {
-		this(parent, x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
+		//this(parent, x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
+		this(parent, x, y, 0, 0, 0, 0, false, false, new Point(0, 0), Color.black, null);
 	}
 	
-	public void setGrowRate(double growRate) {
+	public ParticleGeneratorParticle(GamePanel parent, int x, int y, int speed, Point particleTarget) {
+		//this(parent, x, y, 2, 10, 5, 0, false, false, new Point(x, y - 10), Color.black, null);
+		this(parent, x, y, 0, 0, speed, 0, false, false, particleTarget, Color.black, null);
+	}
+	
+	public void setGrowRate(int growRate) {
 		this.growRate = growRate;
 	}
 	
 	public void update() {
 		//TODO: IMPLEMENT SOLID PARTICLE PHYSICS
 		
+		
 		if (isGrowParticle) {
-			particleSize = particleSize + growRate;
+			width = width + growRate;
+			height = height + growRate;
 		}
 		
 		x += particleSpeed * Math.cos(moveAngle);
@@ -76,18 +88,21 @@ public class ParticleGeneratorParticle extends GameObject{
 			gravPull+= particleGravity/10.0;
 		}
 		
+		
 		if (particleLife > 0) {
 			particleLife--;
 		}
 		else {
-			flaggedForDelete = true;
+			if (particleLife != -1) {
+				flaggedForDelete = true;
+			}
 		}
 	}
 	
 	public void paint(RenderCamera cam, Graphics g) {
 		if (particleImage == null) {
 			g.setColor(particleColor);
-			g.fillOval(x - cam.x, y - cam.y, (int)particleSize, (int)particleSize);
+			g.fillOval(x - cam.x, y - cam.y, width, height);
 		}
 		else {
 			g.drawImage(particleImage, x - cam.x, y - cam.y, null);
