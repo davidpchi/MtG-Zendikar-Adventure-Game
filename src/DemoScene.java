@@ -46,6 +46,9 @@ public class DemoScene extends GamePanel {
 		
 		gameObjs.add(new ChargeSphere(this, 100, 100));
 		
+		//TODO: NEED TO ADD "TO DELETE" FLAG INTO GAME OBJS
+		gameObjs.add(new WhiteFlashFX(this, 10000));
+		
 		/*
 		int particleDensity = 10;
 		int particleSize = 10;
