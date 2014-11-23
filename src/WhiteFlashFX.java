@@ -19,6 +19,9 @@ public class WhiteFlashFX extends GameObject{
 	}
 	
 	public void paint(RenderCamera cam, Graphics g) {
+		if (alphaTransparency < 1) 
+			alphaTransparency = 1;
+		
 		g.setColor(new Color(255,255,255, alphaTransparency));
 		g.fillRect(x, y, width, height);
 	}

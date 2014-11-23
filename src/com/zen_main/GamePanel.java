@@ -30,6 +30,7 @@ public abstract class GamePanel extends JPanel {
 	public RenderCamera cam;
 	
 	public ArrayList<GameObject> gameObjs;
+	protected ArrayList<GameObject> objsToDelete;
 	public ArrayList<UIObject> UIObjs;
 	protected ArrayList<KeyEvent> boundKeys;
 	
@@ -48,6 +49,7 @@ public abstract class GamePanel extends JPanel {
 		addKeyListener(new myKeyListener());
 		
 		gameObjs = new ArrayList<GameObject>();
+		objsToDelete = new ArrayList<GameObject>();
 		UIObjs = new ArrayList<UIObject>();
 		boundKeys = new ArrayList<KeyEvent>();
 		
@@ -65,7 +67,15 @@ public abstract class GamePanel extends JPanel {
 	public void myUpdate() {		
 		//run update on all game objects
 		for (int i = 0; i < gameObjs.size(); i++) {
-			gameObjs.get(i).update();
+			if (gameObjs.get(i).flagForDelete == false)
+				gameObjs.get(i).update();
+			else
+				objsToDelete.add(gameObjs.get(i));
+		}
+		
+		//delete all objs marked for deletion
+		for (int i = 0; i < objsToDelete.size(); i++) {
+			gameObjs.remove(objsToDelete.get(i));
 		}
 		
 		//run update on all UI objects

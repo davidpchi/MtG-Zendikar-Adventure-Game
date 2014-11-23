@@ -18,6 +18,8 @@ public abstract class GameObject {
 	public boolean isSolid;
 	protected GamePanel parent;
 	
+	public boolean flagForDelete;
+	
 	public enum Direction {
 	    NORTH, SOUTH, EAST, WEST, UP, DOWN, LEFT, RIGHT
 	}
@@ -39,6 +41,7 @@ public abstract class GameObject {
 		this.isSolid = isSolid;
 		this.yVel = 0;
 		this.xVel = 0;
+		this.flagForDelete = false;
 	}
 	
 	public void setImage(Image image) {
